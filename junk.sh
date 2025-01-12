@@ -64,7 +64,7 @@ fi
 
 # Move the file to the junk directory
 mv $FILE $JUNKDIR
-if [ $? -ne 0] ; then
+if [ $? -ne 0 ]; then
     echo "Successfully moved $FILE to $JUNKDIR"
 else
     echo "Error: Could not move $FILE to $JUNKDIR"
