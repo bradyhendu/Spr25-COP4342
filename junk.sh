@@ -70,3 +70,4 @@ else
     echo "Error: Could not move $FILE to $JUNKDIR"
     exit 1
 fi
+
