@@ -30,4 +30,11 @@ then
     exit 1
 fi
 
+# Extract all the integer values in the specified column into a seperate file
+cut -d ' ' -f $2 $1 | tail -n +2 | sed 's/[^0-9]*//g' > temp1.dat
+
+# Sort the integer values in ascending order
+sort -n temp1.dat > temp2.dat
+
+
 
