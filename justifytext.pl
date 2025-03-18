@@ -48,31 +48,48 @@ sub justify_paragraph {
         $line_length += length($word);
     }
 
-    # Print last line without full justification
+    # Print the last line as-is without adding extra spaces for justification
     print $out join(' ', @line) . "\n" if @line;
 
-    # Print empty line
+    # Print empty line to separate paragraphs in the output
     print $out "\n";
 }
 
 sub print_justified_line {
     my ($line, $out, $max_width) = @_;
-    my $line_length = length(join('', @$line));
-    my $spaces_needed = $max_width - $line_length;
-    my $gaps = @$line - 1;
+    # Calculate the total length of words in the line
+    my $line_length = length(join('', @$line)); 
+    
+    # Determine the spaces required to justify the line
+    my $spaces_needed = $max_width - $line_length; 
+    
+    # Calculate the number of gaps between words
+    my $gaps = @$line - 1; 
 
     if ($gaps > 0) {
-        my $extra_space = int($spaces_needed / $gaps);
-        my $remaining_space = $spaces_needed % $gaps;
+        # Calculate base spaces per gap
+        my $extra_space = int($spaces_needed / $gaps); 
+        
+        # Determine extra spaces to distribute
+        my $remaining_space = $spaces_needed % $gaps; 
+        
         for my $i (0 .. $gaps - 1) {
-            print $out $line->[$i];
-            print $out ' ' x ($extra_space + ($i < $remaining_space ? 1 : 0));
+            # Print word
+            print $out $line->[$i]; 
+            
+            # Add spaces, distributing extra spaces as needed
+            print $out ' ' x ($extra_space + ($i < $remaining_space ? 1 : 0)); 
         }
-        print $out $line->[-1];
+        
+        # Print the last word
+        print $out $line->[-1]; 
     } else {
-        print $out $line->[0];
+        # Handle single word case, no extra spaces
+        print $out $line->[0] if @$line; 
     }
-    print $out "\n";
+    
+    # End the line
+    print $out "\n"; 
 }
 
 # Exit the program
